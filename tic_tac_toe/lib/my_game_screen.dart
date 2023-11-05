@@ -40,6 +40,21 @@ class _MyGameScreen extends State<MyGameScreen> {
                       );
                     }
                   },
+                  style: ButtonStyle(
+                    overlayColor:
+                        MaterialStateProperty.all(colorScheme.inversePrimary),
+                    elevation: MaterialStateProperty.resolveWith<double>(
+                      (Set<MaterialState> states) =>
+                          states.contains(MaterialState.pressed) ? 5.0 : 15.0,
+                    ),
+                    shadowColor:
+                        MaterialStateProperty.all(colorScheme.inversePrimary),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
                   child: Text(board[index]),
                 ),
               ),
