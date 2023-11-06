@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/board_cell.dart';
 
 class MyGameScreen extends StatefulWidget {
   const MyGameScreen({super.key});
@@ -16,7 +17,7 @@ class _MyGameScreen extends State<MyGameScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.onPrimaryContainer,
+      backgroundColor: colorScheme.primary,
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -31,46 +32,17 @@ class _MyGameScreen extends State<MyGameScreen> {
               ),
               itemCount: 9,
               itemBuilder: (context, index) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: FilledButton.tonal(
-                        onPressed: () {
-                          if (board[index].isEmpty) {
-                            setState(
-                              () {
-                                board[index] = currentPlayer;
-                                currentPlayer =
-                                    (currentPlayer == 'X') ? 'O' : 'X';
-                              },
-                            );
-                          }
-                        },
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateProperty.all(
-                              colorScheme.inversePrimary),
-                          elevation: MaterialStateProperty.resolveWith<double>(
-                            (Set<MaterialState> states) =>
-                                states.contains(MaterialState.pressed)
-                                    ? 5.0
-                                    : 15.0,
-                          ),
-                          shadowColor: MaterialStateProperty.all(
-                              colorScheme.inverseSurface),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
-                        child: Text(board[index]),
-                      ),
-                    ),
-                  ],
+                return BoardCell(
+                  index: index,
+                  board: board,
+                  onPressCell: () {
+                    if (board[index].isEmpty) {
+                      setState(() {
+                        board[index] = currentPlayer;
+                        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                      });
+                    }
+                  },
                 );
               },
             ),

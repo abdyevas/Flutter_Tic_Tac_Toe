@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 124, 65, 176)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 135, 103, 163)),
         useMaterial3: true,
       ),
       home: const MyGameScreen(),
