@@ -5,17 +5,21 @@ class BoardCell extends StatelessWidget {
     super.key,
     required this.index,
     required this.board,
+    required this.gameOver,
     required this.onPressCell,
+    required this.winningButtons,
   });
 
   final int index;
   final List<String> board;
+  final bool gameOver;
   final VoidCallback onPressCell;
+  final List<int> winningButtons;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -23,7 +27,9 @@ class BoardCell extends StatelessWidget {
           width: 100,
           height: 100,
           child: FilledButton.tonal(
-            onPressed: onPressCell,
+            onPressed: gameOver ? null : () {
+              onPressCell();
+            },
             style: ButtonStyle(
               overlayColor:
                   MaterialStateProperty.all(colorScheme.inversePrimary),

@@ -11,6 +11,14 @@ class MyGameScreen extends StatefulWidget {
 class _MyGameScreen extends State<MyGameScreen> {
   List<String> board = List.filled(9, '');
   String currentPlayer = 'X';
+  bool gameOver = false;
+  List<int> winningButtons = [];
+
+  final List<List<int>> winningPositions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6] // Diagonals
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +43,35 @@ class _MyGameScreen extends State<MyGameScreen> {
                 return BoardCell(
                   index: index,
                   board: board,
+                  gameOver: gameOver,
                   onPressCell: () {
-                    if (board[index].isEmpty) {
-                      setState(() {
-                        board[index] = currentPlayer;
+                    if (!gameOver && board[index].isEmpty) {
+                      board[index] = currentPlayer;
+
+                      if (isWinner(currentPlayer)) {
+                        gameOver = true;
+                        winningButtons.addAll(
+                          winningPositions.singleWhere(
+                            (positions) => positions.every(
+                                (index) => board[index] == currentPlayer),
+                            orElse: () => [],
+                          ),
+                        );
+                        print("$currentPlayer wins!");
+                      } else if (board.every((cell) => cell.isNotEmpty)) {
+                        gameOver = true;
+                        print('Draw!');
+                      }
+
+                      if (!gameOver) {
                         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
-                      });
+                      } else {
+                        print(winningButtons);
+                      }
                     }
+                    setState(() {});
                   },
+                  winningButtons: winningButtons,
                 );
               },
             ),
@@ -50,5 +79,14 @@ class _MyGameScreen extends State<MyGameScreen> {
         ],
       ),
     );
+  }
+
+  bool isWinner(String player) {
+    for (List<int> positions in winningPositions) {
+      if (positions.every((index) => board[index] == player)) {
+        return true;
+      }
+    }
+    return false;
   }
 }
