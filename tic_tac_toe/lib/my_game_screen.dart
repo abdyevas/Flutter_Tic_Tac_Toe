@@ -10,8 +10,9 @@ class MyGameScreen extends StatefulWidget {
 
 class _MyGameScreen extends State<MyGameScreen> {
   List<String> board = List.filled(9, '');
-  String currentPlayer = 'X';
+  String currentPlayer = 'x';
   bool gameOver = false;
+  bool isDraw = false;
   List<int> winningButtons = [];
 
   final List<List<int>> winningPositions = [
@@ -30,50 +31,53 @@ class _MyGameScreen extends State<MyGameScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
-            height: 150,
+            height: 200,
           ),
-          SizedBox(
-            height: 500,
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+          Center(
+            child: SizedBox(
+              width: 350,
+              height: 500,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
+                ),
+                itemCount: 9,
+                itemBuilder: (context, index) {
+                  return BoardCell(
+                    index: index,
+                    board: board,
+                    gameOver: gameOver,
+                    isDraw: isDraw,
+                    onPressCell: () {
+                      if (!gameOver && board[index].isEmpty) {
+                        board[index] = currentPlayer;
+          
+                        if (isWinner(currentPlayer)) {
+                          gameOver = true;
+                          winningButtons.addAll(
+                            winningPositions.singleWhere(
+                              (positions) => positions.every(
+                                  (index) => board[index] == currentPlayer),
+                              orElse: () => [],
+                            ),
+                          );
+                        } else if (board.every((cell) => cell.isNotEmpty)) {
+                          gameOver = true;
+                          isDraw = true;
+                        }
+          
+                        if (!gameOver) {
+                          currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
+                        }
+                      }
+                      setState(() {});
+                    },
+                    winningButtons: winningButtons,
+                  );
+                },
               ),
-              itemCount: 9,
-              itemBuilder: (context, index) {
-                return BoardCell(
-                  index: index,
-                  board: board,
-                  gameOver: gameOver,
-                  onPressCell: () {
-                    if (!gameOver && board[index].isEmpty) {
-                      board[index] = currentPlayer;
-
-                      if (isWinner(currentPlayer)) {
-                        gameOver = true;
-                        winningButtons.addAll(
-                          winningPositions.singleWhere(
-                            (positions) => positions.every(
-                                (index) => board[index] == currentPlayer),
-                            orElse: () => [],
-                          ),
-                        );
-                        print("$currentPlayer wins!");
-                      } else if (board.every((cell) => cell.isNotEmpty)) {
-                        gameOver = true;
-                        print('Draw!');
-                      }
-
-                      if (!gameOver) {
-                        currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
-                      } else {
-                        print(winningButtons);
-                      }
-                    }
-                    setState(() {});
-                  },
-                  winningButtons: winningButtons,
-                );
-              },
             ),
           ),
         ],
