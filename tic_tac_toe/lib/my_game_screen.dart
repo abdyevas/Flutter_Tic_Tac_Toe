@@ -36,7 +36,7 @@ class _MyGameScreen extends State<MyGameScreen> {
           Center(
             child: SizedBox(
               width: 350,
-              height: 500,
+              height: 450,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
@@ -53,7 +53,7 @@ class _MyGameScreen extends State<MyGameScreen> {
                     onPressCell: () {
                       if (!gameOver && board[index].isEmpty) {
                         board[index] = currentPlayer;
-          
+
                         if (isWinner(currentPlayer)) {
                           gameOver = true;
                           winningButtons.addAll(
@@ -67,7 +67,7 @@ class _MyGameScreen extends State<MyGameScreen> {
                           gameOver = true;
                           isDraw = true;
                         }
-          
+
                         if (!gameOver) {
                           currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
                         }
@@ -79,6 +79,27 @@ class _MyGameScreen extends State<MyGameScreen> {
                 },
               ),
             ),
+          ),
+          FilledButton.icon(
+            onPressed: () {},
+            style: FilledButton.styleFrom(
+                backgroundColor: colorScheme.inversePrimary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                padding: const EdgeInsets.all(16.0),
+                side: BorderSide(
+                  color: colorScheme.inverseSurface,
+                  width: 5.0,
+                )),
+            icon: const Center(
+              child: Icon(
+                Icons.refresh,
+                size: 40.0,
+                color: Colors.deepPurple,
+              ),
+            ),
+            label: const Text(''),
           ),
         ],
       ),
