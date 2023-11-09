@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/board_cell.dart';
+import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class MyGameScreen extends StatefulWidget {
   const MyGameScreen({super.key});
@@ -26,94 +27,73 @@ class _MyGameScreen extends State<MyGameScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(
-            height: 200,
-          ),
-          Center(
-            child: SizedBox(
-              width: 350,
-              height: 450,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                ),
-                itemCount: 9,
-                itemBuilder: (context, index) {
-                  return BoardCell(
-                    index: index,
-                    board: board,
-                    gameOver: gameOver,
-                    isDraw: isDraw,
-                    onPressCell: () {
-                      if (!gameOver && board[index].isEmpty) {
-                        board[index] = currentPlayer;
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(
+          height: 200,
+        ),
+        Center(
+          child: SizedBox(
+            width: 350,
+            height: 450,
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+              ),
+              itemCount: 9,
+              itemBuilder: (context, index) {
+                return BoardCell(
+                  index: index,
+                  board: board,
+                  gameOver: gameOver,
+                  isDraw: isDraw,
+                  onPressCell: () {
+                    if (!gameOver && board[index].isEmpty) {
+                      board[index] = currentPlayer;
 
-                        if (isWinner(currentPlayer)) {
-                          gameOver = true;
-                          winningButtons.addAll(
-                            winningPositions.singleWhere(
-                              (positions) => positions.every(
-                                  (index) => board[index] == currentPlayer),
-                              orElse: () => [],
-                            ),
-                          );
-                        } else if (board.every((cell) => cell.isNotEmpty)) {
-                          gameOver = true;
-                          isDraw = true;
-                        }
-
-                        if (!gameOver) {
-                          currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
-                        }
+                      if (isWinner(currentPlayer)) {
+                        gameOver = true;
+                        winningButtons.addAll(
+                          winningPositions.singleWhere(
+                            (positions) => positions.every(
+                                (index) => board[index] == currentPlayer),
+                            orElse: () => [],
+                          ),
+                        );
+                      } else if (board.every((cell) => cell.isNotEmpty)) {
+                        gameOver = true;
+                        isDraw = true;
                       }
-                      setState(() {});
-                    },
-                    winningButtons: winningButtons,
-                  );
-                },
-              ),
+
+                      if (!gameOver) {
+                        currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
+                      }
+                    }
+                    setState(() {});
+                  },
+                  winningButtons: winningButtons,
+                );
+              },
             ),
           ),
-          FilledButton(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(colorScheme.inversePrimary),
-              overlayColor: MaterialStateProperty.all(colorScheme.primary),
-              elevation: MaterialStateProperty.resolveWith<double>(
-                (Set<MaterialState> states) =>
-                    states.contains(MaterialState.pressed) ? 5.0 : 15.0,
-              ),
-              shadowColor:
-                  MaterialStateProperty.all(colorScheme.inverseSurface),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-              ),
-              side: MaterialStateProperty.all<BorderSide>(
-                BorderSide(
-                  color: colorScheme.inverseSurface, 
-                  width: 5.0, 
-                ),
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
+        ),
+        StyledButton(
+          radius: 50.0,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
                 Icons.refresh,
                 size: 40.0,
                 color: colorScheme.inverseSurface,
-              ),],
-            ),
+              ),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 
   bool isWinner(String player) {

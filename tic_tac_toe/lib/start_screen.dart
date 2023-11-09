@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -20,7 +21,6 @@ class StartScreen extends StatelessWidget {
               Text(
                 'WELCOME TO\n TIC TAC TOE!',
                 style: GoogleFonts.montserrat(
-                  
                   textStyle: TextStyle(
                     foreground: (Paint()
                       ..style = PaintingStyle.stroke
@@ -53,30 +53,8 @@ class StartScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          FilledButton.tonal(
-            onPressed: () {},
-            style: ButtonStyle(
-              overlayColor:
-                  MaterialStateProperty.all(colorScheme.inversePrimary),
-              elevation: MaterialStateProperty.resolveWith<double>(
-                (Set<MaterialState> states) =>
-                    states.contains(MaterialState.pressed) ? 5.0 : 15.0,
-              ),
-              shadowColor:
-                  MaterialStateProperty.all(colorScheme.inverseSurface),
-              padding: MaterialStateProperty.all(const EdgeInsets.all(20.0)),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-              ),
-              side: MaterialStateProperty.all<BorderSide>(
-                BorderSide(
-                  color: colorScheme.inverseSurface,
-                  width: 5.0,
-                ),
-              ),
-            ),
+          StyledButton(
+            radius: 20.0, 
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

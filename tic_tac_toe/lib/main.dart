@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const Scaffold(
         backgroundColor: Color.fromARGB(255, 100, 53, 142),
-        body:  StartScreen(),
+        body:  MyGameScreen(),
       ),
     );
   }
