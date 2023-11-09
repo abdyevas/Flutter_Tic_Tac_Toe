@@ -25,9 +25,7 @@ class _MyGameScreen extends State<MyGameScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
-      backgroundColor: colorScheme.primary,
-      body: Column(
+    return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
@@ -80,30 +78,42 @@ class _MyGameScreen extends State<MyGameScreen> {
               ),
             ),
           ),
-          FilledButton.icon(
+          FilledButton(
             onPressed: () {},
-            style: FilledButton.styleFrom(
-                backgroundColor: colorScheme.inversePrimary,
-                shape: RoundedRectangleBorder(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(colorScheme.inversePrimary),
+              overlayColor: MaterialStateProperty.all(colorScheme.primary),
+              elevation: MaterialStateProperty.resolveWith<double>(
+                (Set<MaterialState> states) =>
+                    states.contains(MaterialState.pressed) ? 5.0 : 15.0,
+              ),
+              shadowColor:
+                  MaterialStateProperty.all(colorScheme.inverseSurface),
+              padding: MaterialStateProperty.all(const EdgeInsets.all(16.0)),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(50.0),
                 ),
-                padding: const EdgeInsets.all(16.0),
-                side: BorderSide(
-                  color: colorScheme.inverseSurface,
-                  width: 5.0,
-                )),
-            icon: const Center(
-              child: Icon(
-                Icons.refresh,
-                size: 40.0,
-                color: Colors.deepPurple,
+              ),
+              side: MaterialStateProperty.all<BorderSide>(
+                BorderSide(
+                  color: colorScheme.inverseSurface, 
+                  width: 5.0, 
+                ),
               ),
             ),
-            label: const Text(''),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                Icons.refresh,
+                size: 40.0,
+                color: colorScheme.inverseSurface,
+              ),],
+            ),
           ),
         ],
-      ),
-    );
+      );
   }
 
   bool isWinner(String player) {
