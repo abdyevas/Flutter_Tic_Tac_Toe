@@ -3,7 +3,9 @@ import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class MyGameScreen extends StatefulWidget {
-  const MyGameScreen({super.key});
+  const MyGameScreen({super.key, required this.onRefresh});
+
+  final void Function() onRefresh;
 
   @override
   State<MyGameScreen> createState() => _MyGameScreen();
@@ -49,8 +51,9 @@ class _MyGameScreen extends State<MyGameScreen> {
                   board: board,
                   gameOver: gameOver,
                   isDraw: isDraw,
-                  onPressCell: () {
-                    if (!gameOver && board[index].isEmpty) {
+                  onPressCell: (!gameOver)
+                  ? () {
+                    if (board[index].isEmpty) {
                       board[index] = currentPlayer;
 
                       if (isWinner(currentPlayer)) {
@@ -72,7 +75,8 @@ class _MyGameScreen extends State<MyGameScreen> {
                       }
                     }
                     setState(() {});
-                  },
+                  }
+                  : () {},
                   winningButtons: winningButtons,
                 );
               },
@@ -83,7 +87,7 @@ class _MyGameScreen extends State<MyGameScreen> {
           radius: 50.0,
           overlayColor: colorScheme.inversePrimary,
           padding: 20.0,
-          onPressButton: () {},
+          onPressButton: widget.onRefresh,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

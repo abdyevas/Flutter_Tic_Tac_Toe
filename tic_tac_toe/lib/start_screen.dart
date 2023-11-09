@@ -3,7 +3,9 @@ import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  const StartScreen({super.key, required this.switchScreen});
+
+  final void Function() switchScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class StartScreen extends StatelessWidget {
             radius: 20.0,
             overlayColor: colorScheme.inversePrimary,
             padding: 16.0,
-            onPressButton: () {},
+            onPressButton: switchScreen,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
