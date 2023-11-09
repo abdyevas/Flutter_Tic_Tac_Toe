@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
+import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -16,37 +16,16 @@ class StartScreen extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Stack(
-            children: [
-              Text(
-                'WELCOME TO\n TIC TAC TOE!',
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    foreground: (Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 10
-                      ..color = colorScheme.inverseSurface),
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Text(
-                'WELCOME TO\n TIC TAC TOE!',
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                    color: colorScheme.background,
-                    shadows: <Shadow>[
-                      Shadow(
-                        offset: const Offset(10.0, 10.0),
-                        blurRadius: 10.0,
-                        color: colorScheme.inverseSurface,
-                      ),
-                    ],
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+          StyledText(
+            text: 'WELCOME TO\n TIC TAC TOE!',
+            borderWidth: 10.0,
+            fontSize: 35.0,
+            textColor: colorScheme.background,
+            shadow: <Shadow>[
+              Shadow(
+                offset: const Offset(10.0, 10.0),
+                blurRadius: 10.0,
+                color: colorScheme.inverseSurface,
               ),
             ],
           ),
@@ -54,7 +33,10 @@ class StartScreen extends StatelessWidget {
             height: 30,
           ),
           StyledButton(
-            radius: 20.0, 
+            radius: 20.0,
+            overlayColor: colorScheme.inversePrimary,
+            padding: 16.0,
+            onPressButton: () {},
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

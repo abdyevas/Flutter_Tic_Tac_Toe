@@ -81,6 +81,9 @@ class _MyGameScreen extends State<MyGameScreen> {
         ),
         StyledButton(
           radius: 50.0,
+          overlayColor: colorScheme.inversePrimary,
+          padding: 20.0,
+          onPressButton: () {},
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

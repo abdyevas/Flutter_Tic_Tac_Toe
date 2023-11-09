@@ -5,25 +5,31 @@ class StyledButton extends StatelessWidget {
     super.key,
     required this.child,
     required this.radius,
+    required this.overlayColor,
+    required this.padding,
+    required this.onPressButton,
   });
 
   final Widget? child;
   final double radius; 
+  final Color overlayColor;
+  final double padding;
+  final VoidCallback? onPressButton;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
     return FilledButton.tonal(
-      onPressed: () {},
+      onPressed: onPressButton,
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(colorScheme.inversePrimary),
+        overlayColor: MaterialStateProperty.all(overlayColor),
         elevation: MaterialStateProperty.resolveWith<double>(
           (Set<MaterialState> states) =>
               states.contains(MaterialState.pressed) ? 5.0 : 15.0,
         ),
         shadowColor: MaterialStateProperty.all(colorScheme.inverseSurface),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(15.0)),
+        padding: MaterialStateProperty.all(EdgeInsets.all(padding)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:tic_tac_toe/styling/styled_button.dart';
+import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class BoardCell extends StatelessWidget {
   const BoardCell({
@@ -31,83 +32,48 @@ class BoardCell extends StatelessWidget {
         SizedBox(
           width: 100,
           height: 100,
-          child: FilledButton.tonal(
-            onPressed: (gameOver && isEnabled)
-                ? null
-                : () {
-                    onPressCell();
-                  },
-            style: ButtonStyle(
-              overlayColor: (gameOver)
-                ? MaterialStateProperty.all(Colors.transparent)
-                : MaterialStateProperty.all(colorScheme.inversePrimary),
-              elevation: MaterialStateProperty.resolveWith<double>(
-                (Set<MaterialState> states) =>
-                    states.contains(MaterialState.pressed) ? 5.0 : 15.0,
-              ),
-              shadowColor:
-                  MaterialStateProperty.all(colorScheme.inverseSurface),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              side: MaterialStateProperty.all<BorderSide>(
-                BorderSide(
-                  color: colorScheme.inverseSurface, 
-                  width: 5.0, 
-                ),
-              ),
-            ),
-            child: Transform.translate(
-              offset: const Offset(0, -5),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Text(
-                      board[index],
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          foreground: (gameOver && isDraw)
-                              ? (Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 5
-                                ..color = colorScheme.inverseSurface)
-                              : (Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 10
-                                ..color = colorScheme.inverseSurface),
+          child: (gameOver && isEnabled)
+              ? StyledButton(
+                  radius: 10.0,
+                  overlayColor: Colors.transparent,
+                  padding: 0.0,
+                  onPressButton: null,
+                  child: Transform.translate(
+                    offset: const Offset(0, -5),
+                    child: Center(
+                      child: StyledText(
+                          text: board[index],
+                          borderWidth: 5.0,
                           fontSize: 70,
-                          fontWeight: FontWeight.bold,
-                        ),
+                          textColor: colorScheme.inverseSurface,
+                          shadow: null),
+                    ),
+                  ),
+                )
+              : StyledButton(
+                  radius: 10.0,
+                  overlayColor: colorScheme.inversePrimary,
+                  padding: 0.0,
+                  onPressButton: onPressCell,
+                  child: Transform.translate(
+                    offset: const Offset(0, -5),
+                    child: Center(
+                      child: StyledText(
+                        text: board[index],
+                        borderWidth: 10.0,
+                        fontSize: 70,
+                        textColor: colorScheme.inversePrimary,
+                        shadow: <Shadow>[
+                          Shadow(
+                            offset: const Offset(10.0, 10.0),
+                            blurRadius: 10.0,
+                            color: colorScheme.inverseSurface,
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      board[index],
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          color: (gameOver && isDraw)
-                              ? colorScheme.inverseSurface
-                              : colorScheme.inversePrimary,
-                          shadows: (gameOver && isDraw)
-                              ? null
-                              : <Shadow>[
-                                  Shadow(
-                                    offset: const Offset(10.0, 10.0),
-                                    blurRadius: 10.0,
-                                    color: colorScheme.inverseSurface,
-                                  ),
-                                ],
-                          fontSize: 70,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
         ),
       ],
     );
