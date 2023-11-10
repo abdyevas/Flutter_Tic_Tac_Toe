@@ -22,7 +22,13 @@ class _Game extends State<Game> {
 
   void startGame() {
     setState(() {
-      activeScreen = MyGameScreen(onRefresh: () {});
+      activeScreen = MyGameScreen(onRefresh: restartGame);
+    });
+  }
+
+  void restartGame() {
+    setState(() {
+      activeScreen = MyGameScreen(onRefresh: restartGame);
     });
   }
 

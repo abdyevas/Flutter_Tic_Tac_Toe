@@ -3,7 +3,10 @@ import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class MyGameScreen extends StatefulWidget {
-  const MyGameScreen({super.key, required this.onRefresh});
+  const MyGameScreen({
+    super.key,
+    required this.onRefresh,
+  });
 
   final void Function() onRefresh;
 
@@ -52,31 +55,33 @@ class _MyGameScreen extends State<MyGameScreen> {
                   gameOver: gameOver,
                   isDraw: isDraw,
                   onPressCell: (!gameOver)
-                  ? () {
-                    if (board[index].isEmpty) {
-                      board[index] = currentPlayer;
+                      ? () {
+                          if (board[index].isEmpty) {
+                            board[index] = currentPlayer;
 
-                      if (isWinner(currentPlayer)) {
-                        gameOver = true;
-                        winningButtons.addAll(
-                          winningPositions.singleWhere(
-                            (positions) => positions.every(
-                                (index) => board[index] == currentPlayer),
-                            orElse: () => [],
-                          ),
-                        );
-                      } else if (board.every((cell) => cell.isNotEmpty)) {
-                        gameOver = true;
-                        isDraw = true;
-                      }
+                            if (isWinner(currentPlayer)) {
+                              gameOver = true;
+                              winningButtons.addAll(
+                                winningPositions.singleWhere(
+                                  (positions) => positions.every((index) =>
+                                      board[index] == currentPlayer),
+                                  orElse: () => [],
+                                ),
+                              );
+                            } else if (board
+                                .every((cell) => cell.isNotEmpty)) {
+                              gameOver = true;
+                              isDraw = true;
+                            }
 
-                      if (!gameOver) {
-                        currentPlayer = (currentPlayer == 'x') ? 'o' : 'x';
-                      }
-                    }
-                    setState(() {});
-                  }
-                  : () {},
+                            if (!gameOver) {
+                              currentPlayer =
+                                  (currentPlayer == 'x') ? 'o' : 'x';
+                            }
+                          }
+                          setState(() {});
+                        }
+                      : () {},
                   winningButtons: winningButtons,
                 );
               },
@@ -87,7 +92,16 @@ class _MyGameScreen extends State<MyGameScreen> {
           radius: 50.0,
           overlayColor: colorScheme.inversePrimary,
           padding: 20.0,
-          onPressButton: widget.onRefresh,
+          onPressButton: () {
+            widget.onRefresh(); 
+            setState(() {
+              currentPlayer = 'x';
+              gameOver = false;
+              isDraw = false;
+              winningButtons.clear();
+              board = List.filled(9, '');
+            });
+          },
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
