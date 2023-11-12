@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/board_cell.dart';
+import 'package:tic_tac_toe/show_winner.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class MyGameScreen extends StatefulWidget {
@@ -63,13 +64,12 @@ class _MyGameScreen extends State<MyGameScreen> {
                               gameOver = true;
                               winningButtons.addAll(
                                 winningPositions.singleWhere(
-                                  (positions) => positions.every((index) =>
-                                      board[index] == currentPlayer),
+                                  (positions) => positions.every(
+                                      (index) => board[index] == currentPlayer),
                                   orElse: () => [],
                                 ),
                               );
-                            } else if (board
-                                .every((cell) => cell.isNotEmpty)) {
+                            } else if (board.every((cell) => cell.isNotEmpty)) {
                               gameOver = true;
                               isDraw = true;
                             }
@@ -93,7 +93,7 @@ class _MyGameScreen extends State<MyGameScreen> {
           overlayColor: colorScheme.inversePrimary,
           padding: 20.0,
           onPressButton: () {
-            widget.onRefresh(); 
+            widget.onRefresh();
             setState(() {
               currentPlayer = 'x';
               gameOver = false;
@@ -113,6 +113,7 @@ class _MyGameScreen extends State<MyGameScreen> {
             ],
           ),
         ),
+        if (gameOver) {ShowWinner.show(context);},
       ],
     );
   }
