@@ -31,12 +31,13 @@ class _MyGameScreen extends State<MyGameScreen> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final ShowWinner showWinner = ShowWinner();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(
-          height: 200,
+          height: 250,
         ),
         Center(
           child: SizedBox(
@@ -69,9 +70,12 @@ class _MyGameScreen extends State<MyGameScreen> {
                                   orElse: () => [],
                                 ),
                               );
+                              showWinner.showWinnerDialog(
+                                  context, currentPlayer);
                             } else if (board.every((cell) => cell.isNotEmpty)) {
                               gameOver = true;
                               isDraw = true;
+                              showWinner.showWinnerDialog(context, null);
                             }
 
                             if (!gameOver) {
@@ -113,7 +117,6 @@ class _MyGameScreen extends State<MyGameScreen> {
             ],
           ),
         ),
-        if (gameOver) {ShowWinner.show(context);},
       ],
     );
   }
