@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class ShowWinner {
   void showWinnerDialog(BuildContext context, String? winner) {
     final colorScheme = Theme.of(context).colorScheme;
+    
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -17,40 +19,26 @@ class ShowWinner {
           ),
           title: StyledText(
             text: (winner != null)
-                ? 'Game over! Winner $winner!'
+                ? 'Game over! Winner $winner.upper!'
                 : 'Game over! Draw!',
             borderWidth: 3,
             fontSize: 20,
             textColor: colorScheme.inversePrimary,
-            shadow: <Shadow>[
-              Shadow(
-                offset: const Offset(10.0, 10.0),
-                blurRadius: 10.0,
-                color: colorScheme.inverseSurface,
-              ),
-            ],
+            shadow: BoardCell.shadow,
           ),
           actions: [
             Center(
               child: StyledButton(
-                radius: 10.0,
                 overlayColor: colorScheme.inversePrimary,
-                padding: 15.0,
                 onPressButton: () {
                   Navigator.pop(context);
                 },
                 child: StyledText(
+                  borderWidth: 3.0,
                   text: 'OK',
-                  borderWidth: 3,
-                  fontSize: 15,
+                  fontSize: 15.0,
                   textColor: colorScheme.inversePrimary,
-                  shadow: <Shadow>[
-                    Shadow(
-                      offset: const Offset(10.0, 10.0),
-                      blurRadius: 10.0,
-                      color: colorScheme.inverseSurface,
-                    ),
-                  ],
+                  shadow: BoardCell.shadow,
                 ),
               ),
             ),

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class StyledButton extends StatelessWidget {
   const StyledButton({
+    this.radius = 10.0,
+    this.overlayColor = Colors.transparent,
+    this.padding = 15.0,
     super.key,
     required this.child,
-    required this.radius,
-    required this.overlayColor,
-    required this.padding,
     required this.onPressButton,
   });
 

@@ -3,6 +3,14 @@ import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class BoardCell extends StatelessWidget {
+  static final List<Shadow> shadow = <Shadow>[
+    const Shadow(
+      offset: Offset(10.0, 10.0),
+      blurRadius: 10.0,
+      color: Color.fromARGB(255, 51, 32, 58),
+    ),
+  ];
+  
   const BoardCell({
     super.key,
     required this.index,
@@ -34,8 +42,6 @@ class BoardCell extends StatelessWidget {
           height: 100,
           child: (gameOver && isEnabled)
               ? StyledButton(
-                  radius: 10.0,
-                  overlayColor: Colors.transparent,
                   padding: 0.0,
                   onPressButton: null,
                   child: Transform.translate(
@@ -43,15 +49,12 @@ class BoardCell extends StatelessWidget {
                     child: Center(
                       child: StyledText(
                           text: board[index],
-                          borderWidth: 5.0,
-                          fontSize: 70,
                           textColor: colorScheme.inverseSurface,
                           shadow: null),
                     ),
                   ),
                 )
               : StyledButton(
-                  radius: 10.0,
                   overlayColor: colorScheme.inversePrimary,
                   padding: 0.0,
                   onPressButton: onPressCell,
@@ -60,16 +63,8 @@ class BoardCell extends StatelessWidget {
                     child: Center(
                       child: StyledText(
                         text: board[index],
-                        borderWidth: 10.0,
-                        fontSize: 70,
                         textColor: colorScheme.inversePrimary,
-                        shadow: <Shadow>[
-                          Shadow(
-                            offset: const Offset(10.0, 10.0),
-                            blurRadius: 10.0,
-                            color: colorScheme.inverseSurface,
-                          ),
-                        ],
+                        shadow: shadow,
                       ),
                     ),
                   ),

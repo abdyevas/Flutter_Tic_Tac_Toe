@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
@@ -23,13 +24,7 @@ class StartScreen extends StatelessWidget {
             borderWidth: 10.0,
             fontSize: 35.0,
             textColor: colorScheme.background,
-            shadow: <Shadow>[
-              Shadow(
-                offset: const Offset(10.0, 10.0),
-                blurRadius: 10.0,
-                color: colorScheme.inverseSurface,
-              ),
-            ],
+            shadow: BoardCell.shadow,
           ),
           const SizedBox(
             height: 30,
@@ -37,7 +32,6 @@ class StartScreen extends StatelessWidget {
           StyledButton(
             radius: 20.0,
             overlayColor: colorScheme.inversePrimary,
-            padding: 16.0,
             onPressButton: switchScreen,
             child: Row(
               mainAxisSize: MainAxisSize.min,
