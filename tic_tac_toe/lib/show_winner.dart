@@ -17,14 +17,16 @@ class ShowWinner {
               width: 5.0,
             ),
           ),
-          title: StyledText(
-            text: (winner != null)
-                ? 'Game over! Winner $winner.upper!'
-                : 'Game over! Draw!',
-            borderWidth: 3,
-            fontSize: 20,
-            textColor: colorScheme.inversePrimary,
-            shadow: BoardCell.shadow,
+          title: Center(
+            child: StyledText(
+              text: (winner != null)
+                  ? 'Game over! $winner won!'
+                  : 'Game over! Draw!',
+              borderWidth: 3,
+              fontSize: 20,
+              textColor: colorScheme.inversePrimary,
+              shadow: BoardCell.shadow,
+            ),
           ),
           actions: [
             Center(
