@@ -27,28 +27,59 @@ class StartScreen extends StatelessWidget {
             shadow: BoardCell.shadow,
           ),
           const SizedBox(
-            height: 30,
+            height: 40,
           ),
-          StyledButton(
-            radius: 20.0,
-            overlayColor: colorScheme.inversePrimary,
-            onPressButton: switchScreen,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.arrow_circle_right_outlined,
-                  size: 40.0,
-                  color: colorScheme.inverseSurface,
-                ),
-                const Text(
-                  ' Start ',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          SizedBox(
+            width: 200,
+            child: StyledButton(
+              radius: 20.0,
+              overlayColor: colorScheme.inversePrimary,
+              onPressButton: switchScreen,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.person_outline,
+                    size: 40.0,
+                    color: colorScheme.inverseSurface,
                   ),
-                ),
-              ],
+                  const Text(
+                    '  1 player ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20, 
+          ),
+          SizedBox(
+            width: 200,
+            child: StyledButton(
+              radius: 20.0,
+              overlayColor: colorScheme.inversePrimary,
+              onPressButton: switchScreen,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.group_outlined,
+                    size: 40.0,
+                    color: colorScheme.inverseSurface,
+                  ),
+                  const Text(
+                    ' 2 players ',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -7,9 +7,11 @@ class MyGameScreen extends StatefulWidget {
   const MyGameScreen({
     super.key,
     required this.onRefresh,
+    required this.onHome,
   });
 
   final void Function() onRefresh;
+  final void Function() onHome;
 
   @override
   State<MyGameScreen> createState() => _MyGameScreen();
@@ -92,29 +94,52 @@ class _MyGameScreen extends State<MyGameScreen> {
             ),
           ),
         ),
-        StyledButton(
-          radius: 50.0,
-          overlayColor: colorScheme.inversePrimary,
-          onPressButton: () {
-            widget.onRefresh();
-            setState(() {
-              currentPlayer = 'x';
-              gameOver = false;
-              isDraw = false;
-              winningButtons.clear();
-              board = List.filled(9, '');
-            });
-          },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.refresh,
-                size: 40.0,
-                color: colorScheme.inverseSurface,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            StyledButton(
+              radius: 50.0,
+              overlayColor: colorScheme.inversePrimary,
+              onPressButton: () {
+                widget.onRefresh();
+                setState(() {
+                  currentPlayer = 'x';
+                  gameOver = false;
+                  isDraw = false;
+                  winningButtons.clear();
+                  board = List.filled(9, '');
+                });
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.refresh,
+                    size: 40.0,
+                    color: colorScheme.inverseSurface,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            StyledButton(
+              radius: 50.0,
+              overlayColor: colorScheme.inversePrimary,
+              onPressButton: widget.onHome,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.home_outlined,
+                    size: 40.0,
+                    color: colorScheme.inverseSurface,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
     );
