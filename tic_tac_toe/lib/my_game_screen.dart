@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/board_cell.dart';
+import 'package:tic_tac_toe/show_exit_alert.dart';
 import 'package:tic_tac_toe/show_winner.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 
@@ -34,6 +35,7 @@ class _MyGameScreen extends State<MyGameScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final ShowWinner showWinner = ShowWinner();
+    final ShowExitAlert showExitAlert = ShowExitAlert();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -127,7 +129,9 @@ class _MyGameScreen extends State<MyGameScreen> {
             StyledButton(
               radius: 50.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: widget.onHome,
+              onPressButton: () {
+                showExitAlert.showExitDialog(context, widget.onHome);
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

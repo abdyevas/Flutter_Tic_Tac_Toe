@@ -31,6 +31,7 @@ class StartScreen extends StatelessWidget {
           ),
           SizedBox(
             width: 200,
+            height: 70,
             child: StyledButton(
               radius: 20.0,
               overlayColor: colorScheme.inversePrimary,
@@ -39,8 +40,8 @@ class StartScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
-                    Icons.person_outline,
-                    size: 40.0,
+                    Icons.person,
+                    size: 35.0,
                     color: colorScheme.inverseSurface,
                   ),
                   const Text(
@@ -59,6 +60,7 @@ class StartScreen extends StatelessWidget {
           ),
           SizedBox(
             width: 200,
+            height: 70,
             child: StyledButton(
               radius: 20.0,
               overlayColor: colorScheme.inversePrimary,
