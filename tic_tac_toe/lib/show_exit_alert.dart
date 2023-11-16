@@ -14,7 +14,6 @@ class ShowExitAlert {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: colorScheme.inversePrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
             side: const BorderSide(
@@ -32,18 +31,40 @@ class ShowExitAlert {
           ),
           actions: [
             Center(
-              child: StyledButton(
-                onPressButton: () {
-                  onHome();
-                  Navigator.pop(context);
-                },
-                overlayColor: colorScheme.inversePrimary,
-                child: StyledText(
-                  borderWidth: 3.0,
-                    text: 'Yes',
-                    fontSize: 15.0,
-                    textColor: colorScheme.inversePrimary,
-                    shadow: BoardCell.shadow),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  StyledButton(
+                    onPressButton: () {
+                      onHome();
+                      Navigator.pop(context);
+                    },
+                    borderWidthButton: 2.0,
+                    overlayColor: colorScheme.inversePrimary,
+                    child: StyledText(
+                        borderWidth: 3.0,
+                        text: 'Yes',
+                        fontSize: 15.0,
+                        textColor: colorScheme.inversePrimary,
+                        shadow: BoardCell.shadow),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  StyledButton(
+                    onPressButton: () {
+                      Navigator.pop(context);
+                    },
+                    borderWidthButton: 2.0,
+                    overlayColor: colorScheme.inversePrimary,
+                    child: StyledText(
+                        borderWidth: 3.0,
+                        text: 'No',
+                        fontSize: 15.0,
+                        textColor: colorScheme.inversePrimary,
+                        shadow: BoardCell.shadow),
+                  ),
+                ],
               ),
             )
           ],

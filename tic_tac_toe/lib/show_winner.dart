@@ -11,7 +11,6 @@ class ShowWinner {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: colorScheme.inversePrimary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
             side: const BorderSide(
@@ -21,7 +20,7 @@ class ShowWinner {
           title: Center(
             child: StyledText(
               text: (winner != null)
-                  ? 'Game over! $winner won!'
+                  ? 'Game over! ${winner.toUpperCase()} won!'
                   : 'Game over! Draw!',
               borderWidth: 4,
               fontSize: 20,
@@ -36,6 +35,7 @@ class ShowWinner {
                 onPressButton: () {
                   Navigator.pop(context);
                 },
+                borderWidthButton: 2.0,
                 child: StyledText(
                   borderWidth: 3.0,
                   text: 'OK',

@@ -5,6 +5,7 @@ class StyledButton extends StatelessWidget {
     this.radius = 10.0,
     this.overlayColor = Colors.transparent,
     this.padding = 15.0,
+    this.borderWidthButton = 5.0,
     super.key,
     required this.child,
     required this.onPressButton,
@@ -14,6 +15,7 @@ class StyledButton extends StatelessWidget {
   final double radius; 
   final Color overlayColor;
   final double padding;
+  final double borderWidthButton;
   final VoidCallback? onPressButton;
 
   @override
@@ -38,7 +40,7 @@ class StyledButton extends StatelessWidget {
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
             color: colorScheme.inverseSurface,
-            width: 5.0,
+            width: borderWidthButton,
           ),
         ),
       ),
