@@ -38,8 +38,7 @@ class ShowWinner {
                 borderWidthButton: 2.0,
                 child: StyledText(
                   borderWidth: 3.0,
-                  text: 'OK',
-                  fontSize: 15.0,
+                  text: 'Continue',
                   textColor: colorScheme.inversePrimary,
                   shadow: BoardCell.shadow,
                 ),

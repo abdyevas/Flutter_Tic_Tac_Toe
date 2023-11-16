@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/board_cell.dart';
-import 'package:tic_tac_toe/show_exit_alert.dart';
-import 'package:tic_tac_toe/show_winner.dart';
+import 'package:tic_tac_toe/dialogs/show_exit_alert.dart';
+import 'package:tic_tac_toe/dialogs/show_winner.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 
 class MyGameScreen extends StatefulWidget {

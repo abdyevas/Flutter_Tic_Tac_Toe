@@ -10,7 +10,7 @@ class BoardCell extends StatelessWidget {
       color: Color.fromARGB(255, 51, 32, 58),
     ),
   ];
-  
+
   const BoardCell({
     super.key,
     required this.index,
@@ -48,6 +48,7 @@ class BoardCell extends StatelessWidget {
                     offset: const Offset(0, -5),
                     child: Center(
                       child: StyledText(
+                          fontSize: 70.0,
                           text: board[index],
                           textColor: colorScheme.inverseSurface,
                           shadow: null),
@@ -62,6 +63,7 @@ class BoardCell extends StatelessWidget {
                     offset: const Offset(0, -5),
                     child: Center(
                       child: StyledText(
+                        fontSize: 70.0,
                         text: board[index],
                         textColor: colorScheme.inversePrimary,
                         shadow: shadow,

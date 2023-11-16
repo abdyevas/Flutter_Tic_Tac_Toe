@@ -35,7 +35,7 @@ class StartScreen extends StatelessWidget {
             child: StyledButton(
               radius: 20.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: switchScreen,
+              onPressButton: () {},
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [

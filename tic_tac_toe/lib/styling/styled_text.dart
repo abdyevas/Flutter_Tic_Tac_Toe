@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class StyledText extends StatelessWidget {
   const StyledText({
     this.borderWidth = 10.0,
-    this.fontSize = 70.0,
+    this.fontSize = 15.0,
     super.key,
     required this.text,
     required this.textColor,

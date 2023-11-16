@@ -21,12 +21,24 @@ class ShowExitAlert {
             ),
           ),
           title: Center(
-            child: StyledText(
-              text: 'You sure? \nGame state will be lost...',
-              textColor: colorScheme.inversePrimary,
-              borderWidth: 4,
-              fontSize: 20,
-              shadow: BoardCell.shadow,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                StyledText(
+                  text: 'You sure?',
+                  textColor: colorScheme.inversePrimary,
+                  borderWidth: 4,
+                  fontSize: 20,
+                  shadow: BoardCell.shadow,
+                ),
+                StyledText(
+                  text: 'Game state will be lost...',
+                  textColor: colorScheme.inversePrimary,
+                  borderWidth: 4,
+                  fontSize: 20,
+                  shadow: BoardCell.shadow,
+                ),
+              ],
             ),
           ),
           actions: [
@@ -44,7 +56,6 @@ class ShowExitAlert {
                     child: StyledText(
                         borderWidth: 3.0,
                         text: 'Yes',
-                        fontSize: 15.0,
                         textColor: colorScheme.inversePrimary,
                         shadow: BoardCell.shadow),
                   ),
@@ -60,7 +71,6 @@ class ShowExitAlert {
                     child: StyledText(
                         borderWidth: 3.0,
                         text: 'No',
-                        fontSize: 15.0,
                         textColor: colorScheme.inversePrimary,
                         shadow: BoardCell.shadow),
                   ),
