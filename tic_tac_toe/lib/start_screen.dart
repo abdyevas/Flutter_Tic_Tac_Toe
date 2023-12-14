@@ -3,10 +3,17 @@ import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({super.key, required this.switchScreen});
 
   final void Function() switchScreen;
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+} 
+
+class _StartScreenState extends State<StartScreen> {
+  bool isOnePlayer = true;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +42,12 @@ class StartScreen extends StatelessWidget {
             child: StyledButton(
               radius: 20.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: () {},
+              onPressButton: () {
+                setState(() {
+                  isOnePlayer = true; 
+                });
+                widget.switchScreen();
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -64,7 +76,12 @@ class StartScreen extends StatelessWidget {
             child: StyledButton(
               radius: 20.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: switchScreen,
+              onPressButton: () {
+                setState(() {
+                  isOnePlayer = false; 
+                });
+                widget.switchScreen();
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
