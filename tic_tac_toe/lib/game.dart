@@ -20,15 +20,23 @@ class _Game extends State<Game> {
     super.initState();
   }
 
-  void startGame() {
+  void startGame(bool isOnePlayer) {
     setState(() {
-      activeScreen = MyGameScreen(onRefresh: restartGame, onHome: returnHomeScreen,);
+      activeScreen = MyGameScreen(
+        onRefresh: () => restartGame(isOnePlayer),
+        onHome: returnHomeScreen,
+        isOnePlayer: isOnePlayer,
+      );
     });
   }
 
-  void restartGame() {
+  void restartGame(bool isOnePlayer) {
     setState(() {
-      activeScreen = MyGameScreen(onRefresh: restartGame, onHome: returnHomeScreen,);
+      activeScreen = MyGameScreen(
+        onRefresh: () => restartGame(isOnePlayer),
+        onHome: returnHomeScreen,
+        isOnePlayer: isOnePlayer,
+      );
     });
   }
 

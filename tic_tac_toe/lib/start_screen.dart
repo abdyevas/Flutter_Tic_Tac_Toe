@@ -6,7 +6,7 @@ import 'package:tic_tac_toe/styling/styled_text.dart';
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key, required this.switchScreen});
 
-  final void Function() switchScreen;
+  final void Function(bool isOnePlayer) switchScreen;
 
   @override
   State<StartScreen> createState() => _StartScreenState();
@@ -46,7 +46,7 @@ class _StartScreenState extends State<StartScreen> {
                 setState(() {
                   isOnePlayer = true; 
                 });
-                widget.switchScreen();
+                widget.switchScreen(isOnePlayer);
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -80,7 +80,7 @@ class _StartScreenState extends State<StartScreen> {
                 setState(() {
                   isOnePlayer = false; 
                 });
-                widget.switchScreen();
+                widget.switchScreen(isOnePlayer);
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,

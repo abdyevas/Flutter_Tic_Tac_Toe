@@ -9,10 +9,12 @@ class MyGameScreen extends StatefulWidget {
     super.key,
     required this.onRefresh,
     required this.onHome,
+    required this.isOnePlayer,
   });
 
   final void Function() onRefresh;
   final void Function() onHome;
+  final bool isOnePlayer;
 
   @override
   State<MyGameScreen> createState() => _MyGameScreen();
