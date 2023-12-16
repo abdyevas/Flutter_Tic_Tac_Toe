@@ -85,6 +85,9 @@ class _MyGameScreen extends State<MyGameScreen> {
                             }
 
                             if (!gameOver) {
+                              if (widget.isOnePlayer && currentPlayer == 'x') {
+                                // int randomIndex = 
+                              }
                               currentPlayer =
                                   (currentPlayer == 'x') ? 'o' : 'x';
                             }
