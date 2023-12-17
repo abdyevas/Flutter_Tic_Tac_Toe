@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/dialogs/show_exit_alert.dart';
@@ -86,7 +88,7 @@ class _MyGameScreen extends State<MyGameScreen> {
 
                             if (!gameOver) {
                               if (widget.isOnePlayer && currentPlayer == 'x') {
-                                // int randomIndex = 
+                                int randomIndex = _getRandomIndex();
                               }
                               currentPlayer =
                                   (currentPlayer == 'x') ? 'o' : 'x';
@@ -154,6 +156,23 @@ class _MyGameScreen extends State<MyGameScreen> {
         ),
       ],
     );
+  }
+
+  int _getRandomIndex() {
+    List<int> emptyIndeces = [];
+    for (int i = 0; i < board.length; i++) {
+      if (board[i].isEmpty) {
+        emptyIndeces.add(i);
+      }
+    }
+
+    if (emptyIndeces.isNotEmpty) {
+      int randomI = Random().nextInt(emptyIndeces.length);
+      return emptyIndeces[randomI];
+    } else {
+      return -1;
+    }
+
   }
 
   bool isWinner(String player) {
