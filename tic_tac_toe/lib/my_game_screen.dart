@@ -89,9 +89,29 @@ class _MyGameScreen extends State<MyGameScreen> {
                             if (!gameOver) {
                               if (widget.isOnePlayer && currentPlayer == 'x') {
                                 int randomIndex = _getRandomIndex();
+                                board[randomIndex] = 'o';
+
+                                if (isWinner('o')) {
+                                  gameOver = true;
+                                  winningButtons
+                                      .addAll(winningPositions.singleWhere(
+                                    (positions) => positions
+                                        .every((index) => board[index] == 'o'),
+                                    orElse: () => [],
+                                  ));
+                                  showWinner.showWinnerDialog(context, 'o');
+                                } else if (board
+                                    .every((cell) => cell.isNotEmpty)) {
+                                  gameOver = true;
+                                  isDraw = true;
+                                  showWinner.showWinnerDialog(context, null);
+                                }
+
+                                currentPlayer = 'x';
+                              } else {
+                                currentPlayer =
+                                    (currentPlayer == 'x') ? 'o' : 'x';
                               }
-                              currentPlayer =
-                                  (currentPlayer == 'x') ? 'o' : 'x';
                             }
                           }
                           setState(() {});
@@ -136,11 +156,11 @@ class _MyGameScreen extends State<MyGameScreen> {
             StyledButton(
               radius: 50.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: (board.every((cell) => cell.isEmpty)) 
-              ? widget.onHome
-              : () {
-                showExitAlert.showExitDialog(context, widget.onHome);
-              },
+              onPressButton: (board.every((cell) => cell.isEmpty))
+                  ? widget.onHome
+                  : () {
+                      showExitAlert.showExitDialog(context, widget.onHome);
+                    },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -172,7 +192,6 @@ class _MyGameScreen extends State<MyGameScreen> {
     } else {
       return -1;
     }
-
   }
 
   bool isWinner(String player) {
