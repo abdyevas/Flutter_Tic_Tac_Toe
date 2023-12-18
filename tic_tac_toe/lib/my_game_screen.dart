@@ -28,6 +28,8 @@ class _MyGameScreen extends State<MyGameScreen> {
   bool gameOver = false;
   bool isDraw = false;
   List<int> winningButtons = [];
+  int playerXScore = 0; 
+  int playerOcore = 0;
 
   final List<List<int>> winningPositions = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
