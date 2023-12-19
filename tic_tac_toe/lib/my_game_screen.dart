@@ -29,7 +29,7 @@ class _MyGameScreen extends State<MyGameScreen> {
   bool isDraw = false;
   List<int> winningButtons = [];
   int playerXScore = 0;
-  int playerOcore = 0;
+  int playerOScore = 0;
 
   final List<List<int>> winningPositions = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
@@ -53,7 +53,7 @@ class _MyGameScreen extends State<MyGameScreen> {
           child: Column(
             children: [
               Text('Player X: $playerXScore'),
-              Text('Player O: $playerOcore'),
+              Text('Player O: $playerOScore'),
             ],
           ),
         ),
@@ -211,5 +211,12 @@ class _MyGameScreen extends State<MyGameScreen> {
       }
     }
     return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    playerXScore = 0;
+    playerOScore = 0;
   }
 }
