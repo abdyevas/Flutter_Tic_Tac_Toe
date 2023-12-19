@@ -28,7 +28,7 @@ class _MyGameScreen extends State<MyGameScreen> {
   bool gameOver = false;
   bool isDraw = false;
   List<int> winningButtons = [];
-  int playerXScore = 0; 
+  int playerXScore = 0;
   int playerOcore = 0;
 
   final List<List<int>> winningPositions = [
@@ -48,6 +48,14 @@ class _MyGameScreen extends State<MyGameScreen> {
       children: [
         const SizedBox(
           height: 250,
+        ),
+        Center(
+          child: Column(
+            children: [
+              Text('Player X: $playerXScore'),
+              Text('Player O: $playerOcore'),
+            ],
+          ),
         ),
         Center(
           child: SizedBox(
