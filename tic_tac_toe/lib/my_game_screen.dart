@@ -90,6 +90,7 @@ class _MyGameScreen extends State<MyGameScreen> {
                               );
                               showWinner.showWinnerDialog(
                                   context, currentPlayer);
+                              updateScore(currentPlayer);
                             } else if (board.every((cell) => cell.isNotEmpty)) {
                               gameOver = true;
                               isDraw = true;
@@ -110,6 +111,7 @@ class _MyGameScreen extends State<MyGameScreen> {
                                     orElse: () => [],
                                   ));
                                   showWinner.showWinnerDialog(context, 'o');
+                                  updateScore('o');
                                 } else if (board
                                     .every((cell) => cell.isNotEmpty)) {
                                   gameOver = true;
@@ -218,5 +220,13 @@ class _MyGameScreen extends State<MyGameScreen> {
     super.initState();
     playerXScore = 0;
     playerOScore = 0;
+  }
+
+  void updateScore(String winner) {
+    if (winner == 'x') {
+      playerXScore++;
+    } else if (winner == 'o') {
+      playerOScore++;
+    }
   }
 }
