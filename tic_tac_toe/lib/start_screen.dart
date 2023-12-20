@@ -57,7 +57,7 @@ class _StartScreenState extends State<StartScreen> {
                     color: colorScheme.inverseSurface,
                   ),
                   const Text(
-                    '  1 player ',
+                    ' 1 player ',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

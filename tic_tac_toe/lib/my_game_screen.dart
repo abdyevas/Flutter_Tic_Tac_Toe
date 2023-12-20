@@ -5,6 +5,7 @@ import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/dialogs/show_exit_alert.dart';
 import 'package:tic_tac_toe/dialogs/show_winner.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
+import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class MyGameScreen extends StatefulWidget {
   const MyGameScreen({
@@ -52,8 +53,16 @@ class _MyGameScreen extends State<MyGameScreen> {
         Center(
           child: Column(
             children: [
-              Text('Player X: $playerXScore'),
-              Text('Player O: $playerOScore'),
+              StyledText(
+                text: 'Player X: $playerXScore',
+                textColor: colorScheme.inversePrimary,
+                shadow: BoardCell.shadow,
+              ),
+              StyledText(
+                text: 'Player O: $playerOScore',
+                textColor: colorScheme.inversePrimary,
+                shadow: BoardCell.shadow,
+              ),
             ],
           ),
         ),
@@ -230,3 +239,6 @@ class _MyGameScreen extends State<MyGameScreen> {
     }
   }
 }
+
+
+// restart anfer continue button
