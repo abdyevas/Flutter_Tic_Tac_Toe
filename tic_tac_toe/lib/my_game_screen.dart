@@ -48,23 +48,33 @@ class _MyGameScreen extends State<MyGameScreen> {
       mainAxisSize: MainAxisSize.min,
       children: [
         const SizedBox(
-          height: 250,
+          height: 150,
         ),
         Center(
           child: Column(
             children: [
               StyledText(
-                text: 'Player X: $playerXScore',
+                text: 'Player  X  :  $playerXScore',
                 textColor: colorScheme.inversePrimary,
                 shadow: BoardCell.shadow,
+                fontSize: 25.0,
+                borderWidth: 7.0,
+              ),
+              const SizedBox(
+                height: 5,
               ),
               StyledText(
-                text: 'Player O: $playerOScore',
+                text: 'Player  O  :  $playerOScore',
                 textColor: colorScheme.inversePrimary,
                 shadow: BoardCell.shadow,
+                fontSize: 25.0,
+                borderWidth: 7.0,
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         Center(
           child: SizedBox(
