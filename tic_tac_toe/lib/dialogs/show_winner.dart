@@ -4,6 +4,10 @@ import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class ShowWinner {
+  final void Function() onRefresh;
+
+  ShowWinner({required this.onRefresh});
+    
   void showWinnerDialog(BuildContext context, String? winner) {
     final colorScheme = Theme.of(context).colorScheme;
     
@@ -33,6 +37,7 @@ class ShowWinner {
               child: StyledButton(
                 overlayColor: colorScheme.inversePrimary,
                 onPressButton: () {
+                  onRefresh();
                   Navigator.pop(context);
                 },
                 borderWidthButton: 2.0,

@@ -38,10 +38,14 @@ class _MyGameScreen extends State<MyGameScreen> {
     [0, 4, 8], [2, 4, 6] // Diagonals
   ];
 
+  void _refreshCallback() {
+    widget.onRefresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final ShowWinner showWinner = ShowWinner();
+    final ShowWinner showWinner = ShowWinner(onRefresh: _refreshCallback);
     final ShowExitAlert showExitAlert = ShowExitAlert();
 
     return Column(
@@ -249,6 +253,3 @@ class _MyGameScreen extends State<MyGameScreen> {
     }
   }
 }
-
-
-// restart anfer continue button
