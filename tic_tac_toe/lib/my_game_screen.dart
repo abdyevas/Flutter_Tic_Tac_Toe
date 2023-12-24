@@ -38,16 +38,23 @@ class _MyGameScreen extends State<MyGameScreen> {
     [0, 4, 8], [2, 4, 6] // Diagonals
   ];
 
-  void _refreshCallback() {
-    widget.onRefresh();
-  }
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final ShowWinner showWinner = ShowWinner(onRefresh: _refreshCallback);
     final ShowExitAlert showExitAlert = ShowExitAlert();
-
+    ShowWinner showWinner = ShowWinner(onRefresh: () {
+      widget.onRefresh();
+      setState(() {
+        currentPlayer = 'x';
+        gameOver = false; 
+        isDraw = false;
+        winningButtons.clear();
+        board = List.filled(9, '');
+      });
+    },
+    onDismiss: () {},
+    );
+    
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
