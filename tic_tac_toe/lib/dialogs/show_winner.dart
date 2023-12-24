@@ -4,13 +4,14 @@ import 'package:tic_tac_toe/styling/styled_button.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class ShowWinner {
-  final void Function() onRefresh;
+  final VoidCallback onRefresh;
+  final VoidCallback onDismiss;
 
-  ShowWinner({required this.onRefresh});
-    
+  ShowWinner({required this.onRefresh, required this.onDismiss});
+
   void showWinnerDialog(BuildContext context, String? winner) {
     final colorScheme = Theme.of(context).colorScheme;
-    
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -51,6 +52,10 @@ class ShowWinner {
             ),
           ],
         );
+      },
+    ).then(
+      (_) {
+        onDismiss();
       },
     );
   }
