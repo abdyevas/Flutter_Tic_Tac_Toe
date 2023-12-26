@@ -5,7 +5,7 @@ import 'package:tic_tac_toe/board_cell.dart';
 import 'package:tic_tac_toe/dialogs/show_exit_alert.dart';
 import 'package:tic_tac_toe/dialogs/show_winner.dart';
 import 'package:tic_tac_toe/styling/styled_button.dart';
-import 'package:tic_tac_toe/styling/styled_text.dart';
+import 'package:tic_tac_toe/widgets/display_score.dart';
 
 class MyGameScreen extends StatefulWidget {
   const MyGameScreen({
@@ -42,51 +42,26 @@ class _MyGameScreen extends State<MyGameScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final ShowExitAlert showExitAlert = ShowExitAlert();
-    ShowWinner showWinner = ShowWinner(onRefresh: () {
-      widget.onRefresh();
-      setState(() {
-        currentPlayer = 'x';
-        gameOver = false; 
-        isDraw = false;
-        winningButtons.clear();
-        board = List.filled(9, '');
-      });
-    },
-    onDismiss: () {},
+    ShowWinner showWinner = ShowWinner(
+      onRefresh: () {
+        widget.onRefresh();
+        setState(() {
+          currentPlayer = 'x';
+          gameOver = false;
+          isDraw = false;
+          winningButtons.clear();
+          board = List.filled(9, '');
+        });
+      },
+      onDismiss: () {},
     );
-    
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(
-          height: 150,
-        ),
-        Center(
-          child: Column(
-            children: [
-              StyledText(
-                text: 'Player  X  :  $playerXScore',
-                textColor: colorScheme.inversePrimary,
-                shadow: BoardCell.shadow,
-                fontSize: 25.0,
-                borderWidth: 7.0,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              StyledText(
-                text: 'Player  O  :  $playerOScore',
-                textColor: colorScheme.inversePrimary,
-                shadow: BoardCell.shadow,
-                fontSize: 25.0,
-                borderWidth: 7.0,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
+        const SizedBox(height: 150),
+        DisplayScore(playerXScore: playerXScore, playerOScore: playerOScore),
+        const SizedBox(height: 20),
         Center(
           child: SizedBox(
             width: 350,
