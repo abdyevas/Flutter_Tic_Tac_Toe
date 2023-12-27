@@ -173,7 +173,7 @@ class _MyGameScreen extends State<MyGameScreen> {
             StyledButton(
               radius: 50.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: (board.every((cell) => cell.isEmpty))
+              onPressButton: (board.every((cell) => cell.isEmpty && playerOScore == 0 && playerXScore == 0))
                   ? widget.onHome
                   : () {
                       showExitAlert.showExitDialog(context, widget.onHome);
