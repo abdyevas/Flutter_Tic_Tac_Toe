@@ -83,47 +83,12 @@ class _MyGameScreen extends State<MyGameScreen> {
                       ? () {
                           if (board[index].isEmpty) {
                             board[index] = currentPlayer;
-
-                            if (isWinner(currentPlayer)) {
-                              gameOver = true;
-                              winningButtons.addAll(
-                                winningPositions.singleWhere(
-                                  (positions) => positions.every(
-                                      (index) => board[index] == currentPlayer),
-                                  orElse: () => [],
-                                ),
-                              );
-                              showWinner.showWinnerDialog(
-                                  context, currentPlayer);
-                              updateScore(currentPlayer);
-                            } else if (board.every((cell) => cell.isNotEmpty)) {
-                              gameOver = true;
-                              isDraw = true;
-                              showWinner.showWinnerDialog(context, null);
-                            }
-
+                            makeMove(currentPlayer, showWinner);
                             if (!gameOver) {
                               if (widget.isOnePlayer && currentPlayer == 'x') {
                                 int randomIndex = _getRandomIndex();
                                 board[randomIndex] = 'o';
-
-                                if (isWinner('o')) {
-                                  gameOver = true;
-                                  winningButtons
-                                      .addAll(winningPositions.singleWhere(
-                                    (positions) => positions
-                                        .every((index) => board[index] == 'o'),
-                                    orElse: () => [],
-                                  ));
-                                  showWinner.showWinnerDialog(context, 'o');
-                                  updateScore('o');
-                                } else if (board
-                                    .every((cell) => cell.isNotEmpty)) {
-                                  gameOver = true;
-                                  isDraw = true;
-                                  showWinner.showWinnerDialog(context, null);
-                                }
-
+                                makeMove('o', showWinner);
                                 currentPlayer = 'x';
                               } else {
                                 currentPlayer =
@@ -173,7 +138,8 @@ class _MyGameScreen extends State<MyGameScreen> {
             StyledButton(
               radius: 50.0,
               overlayColor: colorScheme.inversePrimary,
-              onPressButton: (board.every((cell) => cell.isEmpty && playerOScore == 0 && playerXScore == 0))
+              onPressButton: (board.every((cell) =>
+                      cell.isEmpty && playerOScore == 0 && playerXScore == 0))
                   ? widget.onHome
                   : () {
                       showExitAlert.showExitDialog(context, widget.onHome);
@@ -232,6 +198,25 @@ class _MyGameScreen extends State<MyGameScreen> {
       playerXScore++;
     } else if (winner == 'o') {
       playerOScore++;
+    }
+  }
+
+  void makeMove(String currentPlayer, ShowWinner showWinner) {
+    if (isWinner(currentPlayer)) {
+      gameOver = true;
+      winningButtons.addAll(
+        winningPositions.singleWhere(
+          (positions) =>
+              positions.every((index) => board[index] == currentPlayer),
+          orElse: () => [],
+        ),
+      );
+      showWinner.showWinnerDialog(context, currentPlayer);
+      updateScore(currentPlayer);
+    } else if (board.every((cell) => cell.isNotEmpty)) {
+      gameOver = true;
+      isDraw = true;
+      showWinner.showWinnerDialog(context, null);
     }
   }
 }
