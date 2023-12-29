@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/board_cell.dart';
+import 'package:tic_tac_toe/widgets/board_cell.dart';
 import 'package:tic_tac_toe/styling/styled_text.dart';
 
 class DisplayScore extends StatelessWidget {
